@@ -1,25 +1,5 @@
-clear, clc, close all
-
-% load an audio file
-[x, fs] = audioread('CTPiano8k.wav');   % load an audio file, fs = 8000
-x = x(:, 1);                            % get the first channel
-
-x = x(1:fs,1);                          % select 1 second of audio
-%%
-cleanData = myDenoiser(x,1000,1,100);
-
-%%
-
-%Generate signal data and noise
-fs     = 8000;
-f      = x;
-denoiseLength = 1;                           % 1 second
-denoiseThreshold = 100;
-
-%%
-close all; clear all; clc;
-
 %% PIANO DENOISE TESTER AND RESYNTHESIZER
+close all; clear all; clc;
 
 [x, fs] = audioread('CTPiano8k.wav');   % load an audio file, fs = 8000
 xmono = x(:, 1);                        % mono signal, select first channel
