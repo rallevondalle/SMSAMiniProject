@@ -5,6 +5,8 @@
 % Author: Ph.D. Eng. Hristo Zhivomirov        12/21/13 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% DOWNLOADED FROM https://se.mathworks.com/matlabcentral/fileexchange/45197-short-time-fourier-transform-stft-with-matlab
+
 function [STFT, f, t] = stft(x, win, hop, nfft, fs)
 
 % function: [STFT, f, t] = stft(x, win, hop, nfft, fs)
