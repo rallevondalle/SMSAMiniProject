@@ -4,7 +4,7 @@ close all; clear all; clc;
 [x, fs] = audioread('CTPiano8k.wav');   % load an audio file, fs = 8000
 xmono = x(:, 1);                        % mono signal, select first channel
 
-analysisLength = 20;                     % 3 seconds
+analysisLength = 3;                    % x seconds of audio
 
 xshort = xmono(1:analysisLength*fs,1);  % select 1 second of audio
 n = length(xshort);                     % number of samples to calculate
