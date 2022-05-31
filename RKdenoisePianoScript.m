@@ -4,14 +4,11 @@ close all; clear all; clc;
 [x, fs] = audioread('CTPiano8k.wav');   % load an audio file, fs = 8000
 xmono = x(:, 1);                        % mono signal, select first channel
 
-analysisLength = 3;                     % 3 seconds
+analysisLength = 20;                     % 3 seconds
 
 xshort = xmono(1:analysisLength*fs,1);  % select 1 second of audio
-
 n = length(xshort);                     % number of samples to calculate
-
 length = length(xshort);                % length of FFT
-
 h = length/n;                           % sampling interval
 t = (0:h:length-h);                     % time vector
 S = xshort;                             % shorten sampled audio
@@ -72,7 +69,17 @@ PSDcleanS     = fhatCleanS.*conj(fhatCleanS)/n; % calculate power spectrum
 
 % Uncomment to listen
 %soundsc(NSmono,fs)
-%soundsc(ffilt,fs)
+soundsc(ffilt,fs)
+
+% Normalize audio to amplitudes between [-1 1]
+NSmonoNorm = 0.9*(NSmono / max(NSmono));
+ffiltNorm  = 0.9*(ffilt / max(ffilt));
+
+
+% Export audio
+%audiowrite('NSmono.wav',NSmonoNorm,fs);
+%audiowrite('ffilt.wav',ffiltNorm,fs);
+%audiowrite('original.wav',xshort,fs);
 
 
 % Plot denoised data vs. original sample
@@ -174,7 +181,7 @@ plot(t,S,'blue')
 legend('Original Sample')
 ylim([-1 1]); set(gca,'FontSize',14)
 xlim([0 1500])
-xlabel('Samples')owe
+xlabel('Samples')
 ylabel('Amplitude')
 
 subplot(3,1,3)
