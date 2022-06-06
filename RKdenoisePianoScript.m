@@ -1,7 +1,7 @@
 %% PIANO DENOISE TESTER AND RESYNTHESIZER
 close all; clear all; clc;
 
-scenario = 3;
+scenario = 1;
 
 if scenario == 1
     filename = '170CSolitudePiano1SP.wav'; % 4.5 seconds analysis, PSDthreshold 0.6
@@ -192,7 +192,7 @@ plot(freq(L),PSDclean(L),'r','LineWidth',1.5), hold on
 plot(freq(L),PSDnoise(L),'-b','LineWidth',1.2)
 plot(xVector,noiseThreshold,'k','LineWidth',2,'LineStyle','--')
 xlim([0 4000]);set(gca,'FontSize',14)
-ylim([0 PSDmax/20])
+ylim([0 PSDmax/10])
 legend('Denoised Data','Noise','Threshold')
 xlabel('Frequency (Hz)')
 ylabel('Power')
@@ -202,7 +202,7 @@ subplot(2,1,2)
 plot(freq(L),PSDS(L),'r','LineWidth',1.5), hold on
 plot(xVector,noiseThreshold,'k','LineWidth',2,'LineStyle','--')
 xlim([0 4000]);set(gca,'FontSize',14)
-ylim([0 PSDmax/20])
+ylim([0 PSDmax/10])
 legend('Original Sample')
 xlabel('Frequency (Hz)')
 ylabel('Power')
@@ -227,7 +227,7 @@ subplot(3,1,1)
 plot(freq(L),PSDS(L),'r','LineWidth',1.5), hold on
 plot(xVector,noiseThreshold,'k','LineWidth',2,'LineStyle','--')
 xlim([0 4000]);set(gca,'FontSize',14)
-ylim([0 PSDmax/20])
+ylim([0 PSDmax/10])
 legend('Original Sample')
 xlabel('Frequency (Hz)')
 ylabel('Power')
@@ -237,7 +237,7 @@ subplot(3,1,2)
 plot(freq(L),PSDclean(L),'r','LineWidth',1.5), hold on
 plot(xVector,noiseThreshold,'k','LineWidth',2,'LineStyle','--')
 xlim([0 4000]);set(gca,'FontSize',14)
-ylim([0 PSDmax/20])
+ylim([0 PSDmax/10])
 legend('Denoised Signal')
 xlabel('Frequency (Hz)')
 ylabel('Power')
@@ -247,7 +247,7 @@ subplot(3,1,3)
 plot(freq(L),PSDnoise(L),'r','LineWidth',1.5), hold on
 plot(xVector,noiseThreshold,'k','LineWidth',2,'LineStyle','--')
 xlim([0 4000]);set(gca,'FontSize',14)
-ylim([0 PSDmax/20])
+ylim([0 PSDmax/10])
 legend('Noise Components')
 xlabel('Frequency (Hz)')
 ylabel('Power')
@@ -364,6 +364,10 @@ hcol = colorbar;
 set(hcol, 'FontName', 'Times New Roman', 'FontSize', 14)
 ylabel(hcol, 'Magnitude, dB')
 
+
+% Frequencies with maximum power
+indexmaxPSD = find(max(PSD(1:fs/2)) == PSD(1:fs/2))
+indexmaxPSDclean = find(max(PSDclean(1:fs/2)) == PSDclean(1:fs/2))
 
 
 % Arrange figures
