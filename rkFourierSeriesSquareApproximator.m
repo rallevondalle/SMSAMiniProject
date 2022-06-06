@@ -18,7 +18,8 @@ fFS = A0/2;
 
 fModes = 500;
 drawInterval = 0.01*fModes;
-C = {'k','b','r','g','y',[.5 .6 .7],[.8 .2 .6]}; % Cell array of colros.
+C = {'k','b','r','g','y',[.5 .6 .7],[.8 .2 .6]}; % cell array of colros.
+
 
 figure(1)
 set(gcf,'Position',[600 500 1800 1200])
@@ -26,7 +27,7 @@ plot(x,f,'k','LineWidth',2), hold on
 xlim([0 L])
 ylim([-0.2 1.2])
 
-pause(3)
+pause(2)
 
 for k=1:fModes
     Ak = sum(f.*cos(2*pi*k*x/L))*dx*2/L;
@@ -35,7 +36,7 @@ for k=1:fModes
     if rem(k,drawInterval) == 0               % draw every xth Fourier mode
         for ii=1:length(C)
             plot(x,f,'k','LineWidth',2), hold on
-            plot(x,fFS,'color',C{ii},'LineWidth',1.2)
+            plot(x,fFS,'color',C{1+rem(ii+randi(2),length(C))},'LineWidth',1.2)
             drawnow
             pause(0.03)
             ii = ii+1;
@@ -56,7 +57,7 @@ title(sprintf('Final approximation of %i Fourier modes', fModes))
 %%
 for i=1:2
     fig = figure(i);
-    fig = sprintf('images/fouriermodes_%s_every_%s_modes_%i',int2str(fModes),int2str(drawInterval),i);
+    fig = sprintf('images/fouriermodesNEW_%s_every_%s_modes_%i',int2str(fModes),int2str(drawInterval),i);
     print(fig,'-dpng')
 end
 %RKautoArrangeFigures(2,2,1,5)
